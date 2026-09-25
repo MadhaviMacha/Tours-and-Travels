@@ -251,3 +251,21 @@ Affiliated to: Osmania University, Hyderabad
 Note
 
 This repository represents the academic project/prototype developed as part of the degree project. Some advanced capabilities discussed in the project documentation are identified as future enhancements rather than full production backend functionality.
+
+
+## Screenshots
+
+### Home Page
+![Home Page](Screenshots/Screenshot%202026-09-25%20212748.png)
+
+### Destinations
+![Destinations](Screenshots/Screenshot%202026-09-25%20212835.png)
+
+### Tour Packages
+![Tour Packages](Screenshots/Screenshot%202026-09-25%20212920.png)
+
+### Booking
+![Booking](Screenshots/Screenshot%202026-09-25%20213021.png)
+
+### Gallery
+![Gallery](Screenshots/Screenshot%202026-09-25%20213112.png)
