@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Package Form</title>
+<link rel="stylesheet" type="text/css" href="package.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: pink; /* page background */
+    }
+   .container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 10px;
+    background-color: #f08da5; /* lighter hibiscus */
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+    h2 {
+        text-align: center;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    select, input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    button1{
+        width: 40%;
+        padding: 10px;
+        background-color:none;
+        color: blue;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+button2 {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+    button:hover {
+        background-color:gray;
+    }
+    .success-message {
+        margin-top: 20px;
+        text-align: center;
+        color:purple;
+    }
+</style>
+</head>
+<body>
+<br><br><br>
+<div class="container">
+<br>
+    <h2>Travel Package Form</h2>
+<br><br>
+    <form id="travelForm">
+        <label for="departure">Departure Place:</label>
+        <select id="departure">
+            <option value="ADILABAD">ADILABAD</option>
+            <option value="NIZAMBAD">NIZAMBAD</OPTION>
+           <option value="WARANGAL">WARANGAL</option>
+          <option value="KHAMMAM">KHAMMAM</option>
+        <option value="KARIMNAGAR">KARIMNAGAR</option>
+       <option value="HYDERABAD">HYDERABAD</option>
+       <option value="MEDAK">MEDAK</option>
+       <option value="NALGONDA">NALGONDA</option>
+     <option value=" JAYASHANKAR BHOPALLY" >JAYASHANKAR BHOPALLY</option>
+        </select>
+
+        <label for="arrival">Arrival Place:</label>
+        <select id="arrival">
+            <option value="ADILABAD">ADILABAD</option>
+           <option value="WARANGAL">WARANGAL</option>
+          <option value="KHAMMAM">KHAMMAM</option>
+        <option value="KARIMNAGAR">KARIMNAGAR</option>
+       <option value="HYDERABAD">HYDERABAD</option>
+       <option value="MEDAK">MEDAK</option>
+       <option value="NALGONDA">NALGONDA</option>
+     <option value=" JAYASHANKAR BHOPALLY" >JAYASHANKAR BHOPALLY</option>
+        </select>
+
+        <label for="arrivalSubPlace">Arrival Sub-Place:</label>
+        <select id="arrivalSubPlace">
+            <option value="ADILABAD">ADILABAD</option>
+           <option value="WARANGAL">WARANGAL</option>
+          <option value="KHAMMAM">KHAMMAM</option>
+        <option value="KARIMNAGAR">KARIMNAGAR</option>
+       <option value="HYDERABAD">HYDERABAD</option>
+       <option value="MEDAK">MEDAK</option>
+       <option value="NALGONDA">NALGONDA</option>
+     <option value=" JAYASHANKAR BHOPALLY" >JAYASHANKAR BHOPALLY</option>
+        </select>
+
+        <label for="departureTime">Departure Time:</label>
+        <input type="time" id="departureTime">
+
+        <label for="arrivalTime">Arrival Time:</label>
+        <input type="time" id="arrivalTime">
+
+    <form id="packagesForm">
+    <label for="adults">Number of Adults:</label>
+    <input type="number" id="adults" name="adults" min="1" value="1" required><br>
+   
+    <label for="children">Number of Children:</label>
+    <input type="number" id="children" name="children" min="0" value="0" required><br>
+   
+    <label for="totalCost">Total Cost:</label>
+    <input type="text" id="totalCost" name="totalCost" readonly>
+   
+    <button type="button" onclick="calculateTotal()">Calculate Total</button>
+  </form>
+
+        <button type="button" onclick="submitForm()"><h3>Proceed</h3></button>
+    </form>
+    <div class="success-message" id="successMessage" style="display: none;">Form submitted successfully!</div>
+</div>
+
+<script>
+ function calculateTotal() {
+      var adults = parseInt(document.getElementById('adults').value);
+      var children = parseInt(document.getElementById('children').value);
+     
+      var adultPrice = 6999;
+      var childPrice = 5599;
+     
+      var totalCost = (adults * adultPrice) + (children * childPrice);
+     
+      document.getElementById('totalCost').value = 'Rs. ' + totalCost.toLocaleString() + '/-';
+    }
+    function submitForm() {
+        // Here you can add code to handle form submission, like sending data to a server
+        // For now, we'll just show a success message
+        document.getElementById("travelForm").reset(); // Reset form fields
+        document.getElementById("successMessage").style.display = "block"; // Show success message
+        setTimeout(function(){
+            document.getElementById("successMessage").style.display = "none"; // Hide success message after 3 seconds
+        }, 3000);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Form</title>
+<style>
+    body {
+        background-color: none;
+        color: #ffffff;
+        font-family: Arial, sans-serif;
+    }
+    .container {
+        max-width: 500px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color:#0000ff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    /* Center the title */
+    .container h2 {
+        text-align: center;
+    }
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    input[type="tel"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    /* Center the submit button */
+    input[type="submit"] {
+        display: block;
+        margin: 0 auto;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 15px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+    /* Center the success message */
+    #success-message {
+        text-align: center;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Contact Us</h2>
+    <form id="contact-form" method="post" action="">
+        <input type="text" name="name" placeholder="Your Name" required><br>
+        <input type="email" name="email" placeholder="Your Email" required><br>
+        <input type="tel" name="phone" placeholder="Your Phone Number" required><br>
+        <textarea name="message" placeholder="Your Message" required></textarea><br>
+        <input type="submit" value="Submit">
+    </form>
+    <div id="success-message" style="display: none; color: green; margin-top: 10px;">Message sent successfully!</div>
+</div>
+
+<script>
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var formData = new FormData(this);
+        // Show a success message
+        document.getElementById('success-message').style.display = 'block';
+        this.reset(); // Reset form fields after successful submission
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tours & Travels Booking</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Page gradient background */
+    background: linear-gradient(135deg, skyblue, violet);
+}
+
+/* Form with gradient background */
+.container {
+    background: linear-gradient(135deg, skyblue, violet); /* medium blue → violet */
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    width: 380px;
+    color: white; /* labels color */
+}
+
+h1 { 
+    text-align: center; 
+    margin-bottom: 25px; 
+    color: white;
+}
+
+.form-group { margin-bottom: 15px; }
+
+/* Input boxes and dropdowns updated */
+select, input[type="text"], input[type="email"], input[type="number"] {
+    width: 100%; 
+    padding: 10px; 
+    border: none; 
+    border-radius: 4px; 
+    box-sizing: border-box;
+    background: white;  /* solid white background */
+    color: black;       /* text color inside inputs */
+}
+
+select option {
+    color: black; /* dropdown options readable */
+}
+
+.radio-group label input {
+    margin-right: 5px;
+}
+
+.radio-group label {
+    color: white;
+}
+
+/* Submit button updated to green */
+input[type="submit"] { 
+    padding: 10px 20px; 
+    background-color: green; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    width: 100%; 
+    font-size: 16px; 
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+input[type="submit"]:hover { 
+    background-color: #006400; /* darker green on hover */
+}
+
+#successMessage { 
+    display: none; 
+    margin-top: 15px; 
+    color: black; 
+    font-size: 14px; 
+    text-align: left; 
+}
+
+.payment-label { 
+    margin-bottom: 5px; 
+    font-weight: bold; 
+    color: white;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>Bus Booking</h1>
+<form id="bookingForm">
+    <div class="form-group">
+        <input type="text" id="name" name="name" placeholder="Name" required>
+    </div>
+
+    <div class="form-group">
+        <input type="email" id="email" name="email" placeholder="Email" required>
+    </div>
+
+    <div class="form-group">
+        <input type="text" id="contact" name="contact" placeholder="Contact" required>
+    </div>
+
+    <div class="form-group">
+        <input type="number" id="people" name="people" placeholder="Number of People" required>
+    </div>
+
+    <div class="form-group">
+        <select id="district" required>
+            <option value="" disabled selected>Select District</option>
+            <option value="Adilabad">Adilabad</option>
+            <option value="Warangal">Warangal</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Medak">Medak</option>
+            <option value="Karimnagar">Karimnagar</option>
+            <option value="Nizamabad">Nizamabad</option>
+            <option value="Khammam">Khammam</option>
+            <option value="Mahbubnagar">Mahbubnagar</option>
+            <option value="Rangareddy">Rangareddy</option>
+            <option value="Nalgonda">Nalgonda</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <select id="touristPlace" name="touristPlace" required>
+            <option value="" disabled selected>Select Tourist Place</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <div class="payment-label">Select Payment Method:</div>
+        <div class="radio-group">
+            <label><input type="radio" id="upi" name="payment" value="UPI"> UPI</label>
+            <label><input type="radio" id="card" name="payment" value="Card"> Credit Card</label>
+            <label><input type="radio" id="cash" name="payment" value="Cash"> Cash</label>
+        </div>
+    </div>
+
+    <input type="submit" value="Book Now">
+</form>
+
+<div id="successMessage"></div>
+</div>
+
+<script>
+// Mapping of districts to their tourist places
+const placesByDistrict = {
+    "Adilabad": ["Kuntala Waterfall", "Domakonda Fort"],
+    "Warangal": ["Warangal Fort", "Bhadrakali Temple", "Lakaram Lake"],
+    "Hyderabad": ["Hussain Sagar", "Golkonda"],
+    "Medak": ["Nizam Sagar"],
+    "Karimnagar": ["Vemulawada"],
+    "Nizamabad": ["Nagnur Temple"],
+    "Khammam": ["Khammam Fort"],
+    "Mahbubnagar": ["Kaleshwaram Dam", "Kaleswaram"],
+    "Rangareddy": ["Laxmi Narasima Swamy Temple"],
+    "Nalgonda": ["Surendrapuri"]
+};
+
+// Update tourist places when district changes
+document.getElementById('district').addEventListener('change', function() {
+    const district = this.value;
+    const placeSelect = document.getElementById('touristPlace');
+    placeSelect.innerHTML = '<option value="" disabled selected>Select Tourist Place</option>'; 
+
+    if(placesByDistrict[district]){
+        placesByDistrict[district].forEach(place => {
+            const option = document.createElement('option');
+            option.value = place;
+            option.textContent = place;
+            placeSelect.appendChild(option);
+        });
+    }
+});
+
+// Form submission
+document.getElementById('bookingForm').addEventListener('submit', function(event){
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const place = document.getElementById('touristPlace').value;
+    const district = document.getElementById('district').value;
+    const messageDiv = document.getElementById('successMessage');
+     messageDiv.innerHTML = `<div class="title"><center><b>Booking successfully!</b></center></div>
+                            Thank you ${name}, for booking with us!<br>
+                            You have booked for ${place} in ${district}.`;
+messageDiv.style.display = 'block';
+});
+</script>
+
+</body>
+</html>

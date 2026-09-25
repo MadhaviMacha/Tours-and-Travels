@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tours and Travels Feedback Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .profile-pic {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        display: block;
+        background-color: #ccc;
+        background-size: cover;
+    }
+    .feedback-form {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .form-group input[type="text"],
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    .form-group textarea {
+        height: 100px;
+    }
+    .form-group button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .form-group button:hover {
+        background-color: #0056b3;
+    }
+    input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 15px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+    /* ⭐ Rating Stars */
+    .rate-us {
+        text-align: center;
+        margin-top: 20px;
+        font-weight: bold;
+        font-size: 18px;
+    }
+    .stars {
+        text-align: center;
+        font-size: 30px;
+        cursor: pointer;
+        margin-bottom: 10px;
+    }
+    .stars span {
+        color: gray;
+        transition: color 0.2s;
+    }
+    .stars span.selected {
+        color: gold;
+    }
+    /* ✅ Success message */
+    #success-message {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 15px;
+        color: purple;
+        display: none;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Tours and Travels Feedback Form</h2>
+    <form id="contact-form" method="post" action="">
+        <img class="profile-pic" src="https://i.pinimg.com/564x/10/cc/e7/10cce70eaf4f6531275e3f618d45af08.jpg" alt="Profile Picture">
+
+        <div class="form-group">
+            <b><label for="name">Name:</label></b>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+            <b><label for="email">Email:</label></b>
+            <input type="text" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <b><label for="phone">Phone:</label></b>
+            <input type="text" id="phone" name="phone" required>
+        </div>
+
+        <div class="rating-section">
+            <b><label for="travel-experience">Traveling Experience:</label></b><br>
+            <input type="radio" name="travel-experience" value="excellent" required> Excellent<br>
+            <input type="radio" name="travel-experience" value="good"> Good<br>
+            <input type="radio" name="travel-experience" value="bad"> Bad
+        </div>
+
+        <div class="tour-guide-feedback">
+            <b><label for="tour-guide-feedback">Tour Guide Feedback:</label></b><br>
+            <input type="radio" name="tour-guide-feedback" value="excellent" required> Excellent<br>
+            <input type="radio" name="tour-guide-feedback" value="good"> Good<br>
+            <input type="radio" name="tour-guide-feedback" value="bad"> Bad
+        </div>
+
+        <div class="rating-section">
+            <b><label for="feedback">Feedback about guide:</label></b><br>
+            <textarea id="guide-feedback" name="guide-feedback" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <b><label for="money-feedback">Feedback about money:</label></b>
+            <textarea id="money-feedback" name="money-feedback" required></textarea>
+        </div>
+
+        <div class="upload-section">
+            <label for="image-upload">Upload Image:</label>
+            <input type="file" id="image-upload" name="image-upload">
+        </div>
+
+        <!-- ⭐ Rate Us Section -->
+        <div class="rate-us">Rate Us!</div>
+        <div class="stars" id="star-container">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+
+    <div id="success-message">Thanks for your Feedback!</div>
+</div>
+
+<script>
+    // ⭐ Star Rating Selection
+    const stars = document.querySelectorAll('#star-container span');
+    let selectedRating = 0;
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            selectedRating = star.getAttribute('data-value');
+            stars.forEach(s => s.classList.remove('selected'));
+            stars.forEach(s => {
+                if (s.getAttribute('data-value') <= selectedRating) {
+                    s.classList.add('selected');
+                }
+            });
+        });
+    });
+
+    // ✅ Form Submission
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        document.getElementById('success-message').style.display = 'block';
+    });
+</script>
+</body>
+</html>
